@@ -17,6 +17,6 @@
 - (IBAction)offlineBtnAction:(UIButton *)sender;
 
 @property(nonatomic,retain)AppData *sharedInstance;
-
+-(void)showAlertWithTitle:(NSString*)inpTitle AndBody:(NSString*) body;
 @end
 
