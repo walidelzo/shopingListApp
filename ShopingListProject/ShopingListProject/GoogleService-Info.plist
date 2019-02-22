@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>1085205774531-q881ilk9godp8iiv2m7c01g50b596fu9.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1085205774531-q881ilk9godp8iiv2m7c01g50b596fu9</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB2HzwZfTPjt5PmbUNM6IR_aWq6B3T4miU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1085205774531</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.nanosoft.ShopingListProject</string>
+	<key>PROJECT_ID</key>
+	<string>shoping-list-app-6c5e7</string>
+	<key>STORAGE_BUCKET</key>
+	<string>shoping-list-app-6c5e7.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1085205774531:ios:1014a4b45064f7ad</string>
+	<key>DATABASE_URL</key>
+	<string>https://shoping-list-app-6c5e7.firebaseio.com</string>
+</dict>
+</plist>
