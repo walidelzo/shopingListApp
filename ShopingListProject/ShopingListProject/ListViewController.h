@@ -6,6 +6,7 @@
 #import "Classes/WriteUserToDisk.h"
 #import "Classes/WriteDataToDisk.h"
 #import "itemViewController.h"
+#import "Classes/SetTheUser.h"
 @interface ListViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
 //our outlets

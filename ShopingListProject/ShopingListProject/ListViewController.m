@@ -117,18 +117,35 @@
 -(void)registerUserWithName:(NSString*)inpName  AndEmail:(NSString*)inpEmail AndPassWord:(NSString*)inpPassword{
     //create email registration with firebase auth
     [FIRAuth.auth createUserWithEmail:inpEmail password:inpPassword completion:^(FIRAuthDataResult * _Nullable authResult, NSError * _Nullable error) {
-        if (error==nil)
+        if (error!=nil)
         {
+            [self showAlertWithTitle:@"create user Error" AndBody:error.description];
             return ;
         }
+        
         //change name profile with name input
         FIRUserProfileChangeRequest *changeRequest=[FIRAuth.auth currentUser].profileChangeRequest ;
         changeRequest.displayName=inpName;
         [changeRequest commitChangesWithCompletion:^(NSError * _Nullable profileError) {
-            if (profileError==nil)
+            if (profileError!=nil)
+            {
+                [self showAlertWithTitle:@"profile Error" AndBody:profileError.description ] ;
+
                 return ;
+            }
+            //to set local user as register user
+            [SetTheUser setWithName:inpName AndEmail:inpName AndUid:authResult.user.uid];
+            
+            //save user as dictionary @ users node
+            NSDictionary *newUserSaveToUsersNode=@{@"name":inpName,@"email":inpEmail,@"uiid":authResult.user.uid};
+            
+            [[self.sharedInstance.userNode child:authResult.user.uid] setValue:newUserSaveToUsersNode];
+            
+            [self showAlertWithTitle:@"saved Alert" AndBody:@"you date saved successfully"];
+            [self.listTableView reloadData];
+            
         }];
-        
+
     }];
     
     
