@@ -167,7 +167,31 @@
 }
 
 
+-(void)loginWithEmail:(NSString*) inpuEmail AndPassword:(NSString*)inpPassword{
+    
+    [[FIRAuth auth]signInWithEmail:inpuEmail password:inpPassword completion:^(FIRAuthDataResult * _Nullable authResult, NSError * _Nullable error) {
+        
+        if (error!=nil)
+        {
+            [ self showAlertWithTitle:@"login Error" AndBody:error.description];
+            return;
+        }
 
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
+            [SetTheUser setWithName:authResult.user.displayName AndEmail:authResult.user.email AndUid:authResult.user.uid];
+            [self readData];
+            [self showAlertWithTitle:@"login" AndBody:@"login Sucussfully.."];
+            
+            
+            
+        });
+        
+    }];
+    
+    
+}
 
 
 
@@ -202,8 +226,9 @@
     UIAlertAction *loginAction=[UIAlertAction actionWithTitle:@"log in"
                                                         style:UIAlertActionStyleDefault
                                                       handler:^(UIAlertAction * _Nonnull action) {
-        //code here
-    }];
+                                                          [self loginAlert];
+                                                          
+                                                      }];
     
     [alert addAction:loginAction];
     
@@ -291,6 +316,41 @@
     
 }
 
+
+
+-(void)loginAlert{
+    UIAlertController *loginAlert=[UIAlertController alertControllerWithTitle:@"log In" message:@"Please enter Email and password" preferredStyle:UIAlertControllerStyleAlert];
+    
+    //add email text
+    [loginAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder=@"email";
+        textField.font=[UIFont systemFontOfSize:20];
+        textField.keyboardType=UIKeyboardTypeEmailAddress;
+        
+    }];
+    
+    //add password text
+    [loginAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder =@"PassWord";
+        textField.font =[UIFont systemFontOfSize:20];
+        textField.secureTextEntry=true;
+    }];
+    
+    //add action ok
+    
+    [loginAlert addAction:[UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self loginWithEmail:loginAlert.textFields[0].text AndPassword:loginAlert.textFields[1].text];
+        
+    
+    }]];
+    
+    
+    //add action cancel
+    [loginAlert addAction:[UIAlertAction actionWithTitle:@"cancel" style:UIAlertActionStyleCancel handler:nil]];
+    
+    [self presentViewController:loginAlert animated:YES completion:nil];
+}
 
 
 
