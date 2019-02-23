@@ -28,9 +28,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
-    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"dd-mm-yyyy HH:MM"];
-    NSString*timeNow=[formatter stringFromDate:[NSDate date]];
+    NSString*timeNow=[DateAndTime dateAndTimeNow];
     
     ItemClass *newItem=[[ItemClass alloc]initWithName:_textField.text AnditemTime:timeNow AndItemPurchased:NO];
     [_sharedInstance.curLST[_curLSTInt].listItems addObject:newItem];
@@ -98,9 +96,7 @@
     _sharedInstance.curLST[_curLSTInt].listItems[indexPath.row].itemPuchased=!_sharedInstance.curLST[_curLSTInt].listItems[indexPath.row].itemPuchased;
     
     /// update date and time to item
-    NSDateFormatter  *formatter=[[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"dd-mm-yyyy HH:MM"];
-    NSString* timeNow=[formatter stringFromDate:[NSDate date]];
+    NSString* timeNow=[DateAndTime dateAndTimeNow];
     
     _sharedInstance.curLST[_curLSTInt].listItems[indexPath.row].itemTime=timeNow;
     

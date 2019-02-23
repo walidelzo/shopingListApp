@@ -14,6 +14,8 @@
 		840032B02217F81400498A8F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 840032622215F4D500498A8F /* main.m */; };
 		840D069D221D89BB0018FA20 /* itemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840D069C221D89BB0018FA20 /* itemViewController.m */; };
 		848167AA221FF6250068BFF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 848167A9221FF6250068BFF9 /* GoogleService-Info.plist */; };
+		848167AD2221559E0068BFF9 /* SaveListOnCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 848167AC2221559E0068BFF9 /* SaveListOnCloud.m */; };
+		848167B0222170EE0068BFF9 /* DateAndTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 848167AF222170EE0068BFF9 /* DateAndTime.m */; };
 		849B2BF822183EBB00C82739 /* ItemClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 8400326B22167B8800498A8F /* ItemClass.m */; };
 		849B2BF922183ECC00C82739 /* UserClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 8400326E221680E900498A8F /* UserClass.m */; };
 		849B2BFA22183ED600C82739 /* ShopingListsClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 840032712216831400498A8F /* ShopingListsClass.m */; };
@@ -65,6 +67,10 @@
 		840D069B221D89BB0018FA20 /* itemViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = itemViewController.h; sourceTree = "<group>"; };
 		840D069C221D89BB0018FA20 /* itemViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = itemViewController.m; sourceTree = "<group>"; };
 		848167A9221FF6250068BFF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		848167AB2221559E0068BFF9 /* SaveListOnCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaveListOnCloud.h; sourceTree = "<group>"; };
+		848167AC2221559E0068BFF9 /* SaveListOnCloud.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveListOnCloud.m; sourceTree = "<group>"; };
+		848167AE222170EE0068BFF9 /* DateAndTime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateAndTime.h; sourceTree = "<group>"; };
+		848167AF222170EE0068BFF9 /* DateAndTime.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DateAndTime.m; sourceTree = "<group>"; };
 		849B2C0422195ECD00C82739 /* WritePlist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WritePlist.h; sourceTree = "<group>"; };
 		849B2C0522195ECD00C82739 /* WritePlist.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WritePlist.m; sourceTree = "<group>"; };
 		9228D068A4AD310380B9CBA0 /* Pods-ShopingListProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopingListProject.debug.xcconfig"; path = "Target Support Files/Pods-ShopingListProject/Pods-ShopingListProject.debug.xcconfig"; sourceTree = "<group>"; };
@@ -153,6 +159,10 @@
 				8400328622175E5400498A8F /* SetTheUser.m */,
 				849B2C0422195ECD00C82739 /* WritePlist.h */,
 				849B2C0522195ECD00C82739 /* WritePlist.m */,
+				848167AB2221559E0068BFF9 /* SaveListOnCloud.h */,
+				848167AC2221559E0068BFF9 /* SaveListOnCloud.m */,
+				848167AE222170EE0068BFF9 /* DateAndTime.h */,
+				848167AF222170EE0068BFF9 /* DateAndTime.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -163,7 +173,6 @@
 				9228D068A4AD310380B9CBA0 /* Pods-ShopingListProject.debug.xcconfig */,
 				33BC047C1CD2F81BBD608CA5 /* Pods-ShopingListProject.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -273,9 +282,11 @@
 				849B2BFD22183EEF00C82739 /* ReadDataFromDisk.m in Sources */,
 				849B2BFB22183EDC00C82739 /* AppData.m in Sources */,
 				840D069D221D89BB0018FA20 /* itemViewController.m in Sources */,
+				848167B0222170EE0068BFF9 /* DateAndTime.m in Sources */,
 				849B2BFA22183ED600C82739 /* ShopingListsClass.m in Sources */,
 				849B2C0622195ECD00C82739 /* WritePlist.m in Sources */,
 				849B2BF922183ECC00C82739 /* UserClass.m in Sources */,
+				848167AD2221559E0068BFF9 /* SaveListOnCloud.m in Sources */,
 				849B2BF822183EBB00C82739 /* ItemClass.m in Sources */,
 				849B2C0322183F3C00C82739 /* ListViewController.m in Sources */,
 				84D82C4A2218290F00109AB1 /* AppDelegate.m in Sources */,

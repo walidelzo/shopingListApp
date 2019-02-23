@@ -6,10 +6,8 @@
     
     AppData *SharedInstance=[AppData SharedManager];
     //make date formmatter
-    NSDateFormatter *formatter=[NSDateFormatter new];
-    [formatter setDateFormat:@"dd-dd-yyyy HH:MM"];
-    NSString *ItemDate= [formatter stringFromDate:[NSDate date]];
-    
+    NSString*ItemDate= [DateAndTime dateAndTimeNow];
+
     ///make item
     ItemClass *item1=[[ItemClass alloc]
                       initWithName:@"Milk"

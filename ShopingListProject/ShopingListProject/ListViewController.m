@@ -1,5 +1,6 @@
 #import "ListViewController.h"
 #import "Classes/WritePlist.h"
+#import "Classes/DateAndTime.h"
 @interface ListViewController ()
 
 @end
@@ -20,7 +21,10 @@
     
     _sharedInstance=[AppData SharedManager];
       [self readData];
-    [self testFirebase];
+    NSLog(@"%@",[WritePlist ReturnFullDirPath]);
+   // [self testFirebase];
+    
+
 }
 
 
@@ -106,11 +110,11 @@
      
      [self showAlertWithTitle:@"test firebase" AndBody:@"you have connected to firebase susccesfully.." ];
      }
-     }]; */
+     }];
     
     NSMutableDictionary *dicToTest=[NSMutableDictionary new];
     [dicToTest setObject:@"test value" forKey:@"test Key"];
-    [[_sharedInstance.rootNode child:@"test"]setValue:dicToTest];
+    [[_sharedInstance.rootNode child:@"test"]setValue:dicToTest];*/
     
 }
 
@@ -133,6 +137,9 @@
 
                 return ;
             }
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
             //to set local user as register user
             [SetTheUser setWithName:inpName AndEmail:inpName AndUid:authResult.user.uid];
             
@@ -141,9 +148,17 @@
             
             [[self.sharedInstance.userNode child:authResult.user.uid] setValue:newUserSaveToUsersNode];
             
-            [self showAlertWithTitle:@"saved Alert" AndBody:@"you date saved successfully"];
             [self.listTableView reloadData];
             
+            ///save items data to cloud
+            
+            for (ShopingListsClass *any in self.sharedInstance.curLST){
+            [SaveListOnCloud Save:any];
+            }
+            
+            [self showAlertWithTitle:@"saved Alert" AndBody:@"you date saved successfully"];
+
+            });
         }];
 
     }];

@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WritePlist : NSObject
 +(NSString*)pathDocumentWithFileName:(NSString*) plistFileName;
 +(void)writeToPlistWithPath:(NSString*)documentPath Data:(id)dataToSaved;
++(NSString*)ReturnFullDirPath;
+
 @end
 
 NS_ASSUME_NONNULL_END

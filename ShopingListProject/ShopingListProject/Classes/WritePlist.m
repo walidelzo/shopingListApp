@@ -29,5 +29,12 @@
 
 
 }
++ (NSString*)ReturnFullDirPath{
+    NSArray *path=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *dirPath=path[0];
+    return dirPath;
+}
+
+
 
 @end
