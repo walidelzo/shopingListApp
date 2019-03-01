@@ -1,6 +1,7 @@
 #import "ListViewController.h"
 #import "Classes/WritePlist.h"
 #import "Classes/DateAndTime.h"
+#import "Classes/ReadDataFromCloud.h"
 @interface ListViewController ()
 
 @end
@@ -20,11 +21,10 @@
     [super viewDidLoad];
     
     _sharedInstance=[AppData SharedManager];
-      [self readData];
-    NSLog(@"%@",[WritePlist ReturnFullDirPath]);
-   // [self testFirebase];
+    [self readData];
+    //NSLog(@"%@",[WritePlist ReturnFullDirPath]);
+    // [self testFirebase];
     
-
 }
 
 
@@ -35,18 +35,18 @@
 
 - (IBAction)newListBtnAction:(UIButton *)sender
 {
-
+    
     UIAlertController *alert=[UIAlertController
                               alertControllerWithTitle:@"Add new List "
                               message:@"please enter list name"
                               preferredStyle:UIAlertControllerStyleAlert];
     
-   [ alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-       textField.placeholder=@"List name" ;
-       textField.font=[UIFont systemFontOfSize:20];
-       textField.textAlignment=NSTextAlignmentCenter;
+    [ alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder=@"List name" ;
+        textField.font=[UIFont systemFontOfSize:20];
+        textField.textAlignment=NSTextAlignmentCenter;
         
-   }];
+    }];
     
     UIAlertAction *action=[UIAlertAction
                            actionWithTitle:@"OK"
@@ -81,24 +81,58 @@
 }
 
 -(void)readData{
-  
+    
     [ReadUserFromDisk read];
     if (_sharedInstance.curUser!=nil)
     {
-       // NSLog(@"old data");
+        // NSLog(@"old data");
         [ReadDataFromDisk readData];
         _sharedInstance.curLST=_sharedInstance.offlineLST;
-      //  NSLog(@"new  data  of user.....%@",_sharedInstance.curUser.name);
-
+        //  NSLog(@"new  data  of user.....%@",_sharedInstance.curUser.name);
+        
     }else{
-       // NSLog(@"default data .....");
+        // NSLog(@"default data .....");
         _sharedInstance.curUser =[[UserClass alloc]initWithnName:@"ME" AndEmail:@"defEmail" AndUid:@"defUid"];
         [PrepareFirstLists prepare];
         [WriteUserToDisk Write];
         [WriteDataToDisk WriteData];
     }
     
+    [self setUpProfileButtonWithTitle:@"Offline!" andColor:[UIColor orangeColor]];
+
+    
+    if (FIRAuth.auth.currentUser != nil){
+        [self setUpProfileButtonWithTitle:@"Online!" andColor:[UIColor greenColor]];
+        [ReadDataFromDisk readData];
+        
+        [ReadDataFromCloud read];
+
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.sharedInstance.curLST=[CompareList compare:self.sharedInstance.onlineLST and:self.sharedInstance.offlineLST];
+            
+            for (ShopingListsClass *any in self.sharedInstance.curLST){
+
+                any.listOwner=self.sharedInstance.curUser;
+                [SaveListOnCloud Save:any];
+
+                
+            }
+            [self.listTableView reloadData];
+            
+       });
+        
+    }
+
+    
+    
+    
 }
+
+-(void)setUpProfileButtonWithTitle:(NSString*) title andColor:(UIColor*)color{
+    [_profileButton setTitle:title forState:UIControlStateNormal];
+    [_profileButton setBackgroundColor:color];
+}
+
 
 
 #pragma  mark - Firebase Methods
@@ -111,10 +145,10 @@
      [self showAlertWithTitle:@"test firebase" AndBody:@"you have connected to firebase susccesfully.." ];
      }
      }];
-    
-    NSMutableDictionary *dicToTest=[NSMutableDictionary new];
-    [dicToTest setObject:@"test value" forKey:@"test Key"];
-    [[_sharedInstance.rootNode child:@"test"]setValue:dicToTest];*/
+     
+     NSMutableDictionary *dicToTest=[NSMutableDictionary new];
+     [dicToTest setObject:@"test value" forKey:@"test Key"];
+     [[_sharedInstance.rootNode child:@"test"]setValue:dicToTest];*/
     
 }
 
@@ -134,33 +168,33 @@
             if (profileError!=nil)
             {
                 [self showAlertWithTitle:@"profile Error" AndBody:profileError.description ] ;
-
+                
                 return ;
             }
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            //to set local user as register user
-            [SetTheUser setWithName:inpName AndEmail:inpName AndUid:authResult.user.uid];
-            
-            //save user as dictionary @ users node
-            NSDictionary *newUserSaveToUsersNode=@{@"name":inpName,@"email":inpEmail,@"uiid":authResult.user.uid};
-            
-            [[self.sharedInstance.userNode child:authResult.user.uid] setValue:newUserSaveToUsersNode];
-            
-            [self.listTableView reloadData];
-            
-            ///save items data to cloud
-            
-            for (ShopingListsClass *any in self.sharedInstance.curLST){
-            [SaveListOnCloud Save:any];
-            }
-            
-            [self showAlertWithTitle:@"saved Alert" AndBody:@"you date saved successfully"];
-
+                
+                //to set local user as register user
+                [SetTheUser setWithName:inpName AndEmail:inpEmail AndUid:authResult.user.uid];
+                
+                //save user as dictionary @ users node
+                NSDictionary *newUserSaveToUsersNode=@{@"name":inpName,@"email":inpEmail,@"uiid":authResult.user.uid};
+                
+                [[self.sharedInstance.userNode child:authResult.user.uid] setValue:newUserSaveToUsersNode];
+                
+                [self.listTableView reloadData];
+                
+                ///save items data to cloud
+                
+                for (ShopingListsClass *any in self.sharedInstance.curLST){
+                    [SaveListOnCloud Save:any];
+                }
+                
+                [self showAlertWithTitle:@"saved Alert" AndBody:@"you date saved successfully"];
+                
             });
         }];
-
+        
     }];
     
     
@@ -176,10 +210,10 @@
             [ self showAlertWithTitle:@"login Error" AndBody:error.description];
             return;
         }
-
+        
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-
+            
             [SetTheUser setWithName:authResult.user.displayName AndEmail:authResult.user.email AndUid:authResult.user.uid];
             [self readData];
             [self showAlertWithTitle:@"login" AndBody:@"login Sucussfully.."];
@@ -198,16 +232,16 @@
 #pragma mark - alert methods
 //make alert message with parameter
 - (void)showAlertWithTitle:(NSString *)inpTitle AndBody:(NSString *)body{
-   
+    
     UIAlertController *alert=[UIAlertController alertControllerWithTitle:inpTitle
-                                             message:body
-                                      preferredStyle:UIAlertControllerStyleAlert];
+                                                                 message:body
+                                                          preferredStyle:UIAlertControllerStyleAlert];
     
     [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-                                    //////profile alert action
+//////profile alert action
 
 -(void)showProfileAlert{
     UIAlertController *alert=[UIAlertController
@@ -235,8 +269,8 @@
     UIAlertAction *logOutAction =[UIAlertAction actionWithTitle:@"log Out"
                                                           style:UIAlertActionStyleDefault
                                                         handler:^(UIAlertAction * _Nonnull action) {
-        //code here
-    }];
+                                                            //code here
+                                                        }];
     
     [alert addAction:logOutAction];
     
@@ -248,7 +282,7 @@
     
 }
 
-                ///register alert
+///register alert
 -(void)registerAlert{
     UIAlertController *registerAlert=[UIAlertController alertControllerWithTitle:@"Register view"
                                                                          message:@"please fill this date to register." preferredStyle:UIAlertControllerStyleAlert ];
@@ -289,7 +323,7 @@
             [self showAlertWithTitle:@"emtpy fields" AndBody:@"please fill empty Fields"];
             
         }else if (![registerAlert.textFields[2].text isEqualToString:registerAlert.textFields[3].text])
-        
+            
         {
             [self showAlertWithTitle:@"password alert" AndBody:@"password and Confirm password not Equal"];
         }else {
@@ -297,17 +331,17 @@
             [self registerUserWithName:registerAlert.textFields[0].text
                               AndEmail:registerAlert.textFields[1].text
                            AndPassWord:registerAlert.textFields[2].text];
-
+            
             
             
             
         }
-
         
         
         
-   
-    
+        
+        
+        
     }] ];
     
     [registerAlert addAction:[UIAlertAction actionWithTitle:@"cancel" style:UIAlertActionStyleCancel handler:nil] ];
@@ -342,7 +376,7 @@
         
         [self loginWithEmail:loginAlert.textFields[0].text AndPassword:loginAlert.textFields[1].text];
         
-    
+        
     }]];
     
     
@@ -357,7 +391,7 @@
 #pragma mark  -   tableView_DataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-   // NSLog(@"%lu",_sharedInstance.curLST.count);
+    // NSLog(@"%lu",_sharedInstance.curLST.count);
     return _sharedInstance.curLST.count;
     
 }
@@ -402,10 +436,10 @@
 #pragma  mark - segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-  //  if ([segue.destinationViewController isKindOfClass:[itemViewController class]]){
+    //  if ([segue.destinationViewController isKindOfClass:[itemViewController class]]){
     itemViewController *itemVC=segue.destinationViewController;
-        NSIndexPath *indexPath=sender;
-        itemVC.curLSTInt=indexPath.row;
+    NSIndexPath *indexPath=sender;
+    itemVC.curLSTInt=indexPath.row;
     //}
 }
 

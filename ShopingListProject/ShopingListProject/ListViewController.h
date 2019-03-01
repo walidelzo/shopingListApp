@@ -8,6 +8,7 @@
 #import "itemViewController.h"
 #import "Classes/SetTheUser.h"
 #import "Classes/SaveListOnCloud.h"
+#import "Classes/CompareList.h"
 @interface ListViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
 //our outlets

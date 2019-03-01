@@ -26,7 +26,7 @@
         [items setObject:newItemAsADictionary forKey:any.itemName];
     }
     
-    [listDic setObject:items forKey:inpList.listName];
+    [listDic setObject:items forKey:@"listItems"];
     
     
     AppData *sharedInstance=[AppData SharedManager];
