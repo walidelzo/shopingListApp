@@ -27,14 +27,19 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    
-    NSString*timeNow=[DateAndTime dateAndTimeNow];
+   
+    if (![textField.text isEqualToString:@""])
+    {NSString*timeNow=[DateAndTime dateAndTimeNow];
     
     ItemClass *newItem=[[ItemClass alloc]initWithName:_textField.text AnditemTime:timeNow AndItemPurchased:NO];
     [_sharedInstance.curLST[_curLSTInt].listItems addObject:newItem];
     [WriteDataToDisk WriteData];
     [_itemTableView reloadData];
+    [SaveItemToCloud saveItemToCloudWithItem:newItem andInpList:_sharedInstance.curLST[_curLSTInt]];
+
     _textField.text=@"";
+    
+    }
     
 }
 
@@ -43,7 +48,32 @@
 
 
 
-- (IBAction)shareBtnAction:(UIButton *)sender {
+- (IBAction)shareBtnAction:(UIButton *)sender
+
+{
+    if (FIRAuth.auth.currentUser.uid==nil)
+    {
+        [self showAlertWithTitle:@"login error" AndBody:@"you Must Login before share list"];
+        return;
+    }
+    
+    UIAlertController *sharAlert=[UIAlertController alertControllerWithTitle:@"share" message:@"to share this list please Enter Email Address " preferredStyle:UIAlertControllerStyleAlert ];
+    
+    [sharAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder=@"Enter Email Address";
+        textField.font=[UIFont systemFontOfSize:22];
+        textField.keyboardType  = UIKeyboardTypeEmailAddress;
+        
+    }];
+   
+    [sharAlert addAction:[UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //code here
+    }] ];
+    
+    [sharAlert addAction: [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+    
+    [self presentViewController:sharAlert animated:YES completion:nil];
+
 }
 
 #pragma mark - uitable view dataSource
@@ -104,6 +134,10 @@
     [_itemTableView reloadData];
     [WriteDataToDisk WriteData];
     
+    //save item purchased state to cloud
+    ShopingListsClass *thisList=_sharedInstance.curLST[_curLSTInt];
+    ItemClass *thisItem=thisList.listItems[indexPath.row];
+    [SaveItemToCloud saveItemToCloudWithItem:thisItem andInpList:thisList];
     
 }
 
@@ -122,8 +156,8 @@
     [_itemTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     
     [WriteDataToDisk WriteData];
-    
-    
+    //delete item from cloud
+    [DeleteItemFromCloud deleteItem:itemToRemove inList:_sharedInstance.curLST[_curLSTInt]];
     
 }
 
@@ -131,4 +165,19 @@
     [self dismissViewControllerAnimated:true completion:nil];
     
 }
+
+#pragma mark - alert methods
+//make alert message with parameter
+- (void)showAlertWithTitle:(NSString *)inpTitle AndBody:(NSString *)body{
+    
+    UIAlertController *alert=[UIAlertController alertControllerWithTitle:inpTitle
+                                                                 message:body
+                                                          preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+
+
 @end

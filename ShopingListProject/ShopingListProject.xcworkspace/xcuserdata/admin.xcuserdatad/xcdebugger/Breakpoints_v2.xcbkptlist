@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ShopingListProject/ListViewController.m"
-            timestampString = "573052856.928664"
+            filePath = "ShopingListProject/Classes/CompareList.m"
+            timestampString = "573203372.013173"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "421"
-            endingLineNumber = "421"
-            landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
+            startingLineNumber = "5"
+            endingLineNumber = "5"
+            landmarkName = "+compare:and:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

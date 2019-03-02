@@ -9,11 +9,14 @@
 #import "Classes/SetTheUser.h"
 #import "Classes/SaveListOnCloud.h"
 #import "Classes/CompareList.h"
+#import "Classes/DeleteListFromCloud.h"
 @interface ListViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
 //our outlets
 @property (weak, nonatomic) IBOutlet UITableView *listTableView;
 @property (weak, nonatomic) IBOutlet UIButton *profileButton;
+@property (weak, nonatomic) IBOutlet UILabel *userlabel;
+
 
 //our Actions
 - (IBAction)newListBtnAction:(UIButton *)sender;

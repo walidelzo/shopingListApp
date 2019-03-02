@@ -9,35 +9,17 @@
     NSString*ItemDate= [DateAndTime dateAndTimeNow];
 
     ///make item
-    ItemClass *item1=[[ItemClass alloc]
-                      initWithName:@"Milk"
-                      AnditemTime:ItemDate
-                      AndItemPurchased:YES];
-    
-    ItemClass *item2=[[ItemClass alloc]
-                      initWithName:@"Bread"
+    ItemClass *sampleItem=[[ItemClass alloc]
+                      initWithName:@"test item"
                       AnditemTime:ItemDate
                       AndItemPurchased:NO];
-    //the office items
-    ItemClass *item4=[[ItemClass alloc]
-                      initWithName:@"Pens"
-                      AnditemTime:ItemDate
-                      AndItemPurchased:YES];
-    ItemClass *item5=[[ItemClass alloc]
-                                       initWithName:@"Paper"
-                                        AnditemTime:ItemDate
-                                   AndItemPurchased:NO];
     
 //add all items in array lists
-    NSMutableArray *items1=[[NSMutableArray alloc]initWithObjects:item1,item2, nil];
-    NSMutableArray *items2=[[NSMutableArray alloc]initWithObjects:item4,item5,nil];
+    NSMutableArray *items1=[[NSMutableArray alloc]initWithObjects:sampleItem, nil];
     
-    ShopingListsClass *list1=[[ShopingListsClass alloc]initWithName:@"Ketchen List " AndlistOwner:SharedInstance.curUser AndSavedItems:items1];
-    
-    ShopingListsClass *list2=[[ShopingListsClass alloc]initWithName:@"Office List" AndlistOwner:SharedInstance.curUser AndSavedItems:items2];
+    ShopingListsClass *list1=[[ShopingListsClass alloc]initWithName:@"Sample List " AndlistOwner:SharedInstance.curUser AndSavedItems:items1];
     
     [SharedInstance.curLST addObject:list1];
-    [SharedInstance.curLST addObject:list2];
     
 }
 @end

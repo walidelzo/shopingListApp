@@ -16,8 +16,10 @@
         
     }
     
-    
-    
+    NSLog(@"---(offline list)------->>> %li",sharedInstance.offlineLST.count);
+    NSLog(@"---(cur list)------->>> %li",sharedInstance.curLST.count);
+    NSLog(@"---(cur user)------->>> %@",sharedInstance.curUser.name);
+
     
 }
 @end

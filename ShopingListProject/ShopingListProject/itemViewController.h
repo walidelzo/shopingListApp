@@ -1,6 +1,8 @@
 #import <UIKit/UIKit.h>
 #import "Classes/AppData.h"
 #import "Classes/WriteDataToDisk.h"
+#import "Classes/SaveItemToCloud.h"
+#import "Classes/DeleteItemFromCloud.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface itemViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>

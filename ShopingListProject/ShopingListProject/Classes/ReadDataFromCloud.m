@@ -10,10 +10,9 @@
     NSString*userId= FIRAuth.auth.currentUser.uid;
     [[sharedInstance.dataNode child:userId] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
-        NSDictionary *lists=snapshot.value;
-        //NSLog(@"=====   %@",lists.allValues);
-        
-        if (lists !=nil){
+        if (snapshot.hasChildren){
+            NSDictionary *lists=snapshot.value;
+
             for (NSDictionary *any in lists.allValues)
             {
                 NSString*listName=[any objectForKey:@"listName"];
@@ -56,6 +55,6 @@
     }];
 
 
-
+    NSLog(@" - - - - - ->  %li",sharedInstance.onlineLST.count);
 }
 @end
