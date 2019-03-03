@@ -26,6 +26,7 @@
     NSLog(@"%@",[WritePlist ReturnFullDirPath]);
     // [self testFirebase];
     _userlabel.text =_sharedInstance.curUser.name;
+    
 }
 
 
@@ -110,7 +111,12 @@
         
         [ReadDataFromDisk readData];
         [ReadDataFromCloud read];
-        
+        [ReadInvitations readCoordinates];
+        NSLog(@"---online list --- >%li",_sharedInstance.onlineLST.count);
+        NSLog(@"--invitationscoords --> %lu %@ , %@ --->",_sharedInstance.invitationsCoords.count,_sharedInstance.invitationsCoords[0].listName,_sharedInstance.invitationsCoords[1].listName);
+       
+        [FetchInvitationnData FetchInvitationList];
+        NSLog(@" -=-=-=- the fetched invitations count is -=-=---->  %lu",_sharedInstance.invitationLST.count);
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -157,6 +163,7 @@
      NSMutableDictionary *dicToTest=[NSMutableDictionary new];
      [dicToTest setObject:@"test value" forKey:@"test Key"];
      [[_sharedInstance.rootNode child:@"test"]setValue:dicToTest];*/
+    //[_sharedInstance.userNode quer]
     
 }
 

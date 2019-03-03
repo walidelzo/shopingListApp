@@ -10,6 +10,9 @@
 #import "Classes/SaveListOnCloud.h"
 #import "Classes/CompareList.h"
 #import "Classes/DeleteListFromCloud.h"
+#import "Classes/ReadInvitations.h"
+#import "Classes/FetchInvitationnData.h"
+
 @interface ListViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
 //our outlets

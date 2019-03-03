@@ -13,10 +13,13 @@
 		840032602215F4D500498A8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8400325E2215F4D500498A8F /* LaunchScreen.storyboard */; };
 		840032B02217F81400498A8F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 840032622215F4D500498A8F /* main.m */; };
 		84085ACC2229948400F70A27 /* DeleteListFromCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 84085ACB2229948400F70A27 /* DeleteListFromCloud.m */; };
+		840D02C7222C629D00B4306A /* FetchInvitationnData.m in Sources */ = {isa = PBXBuildFile; fileRef = 840D02C6222C629D00B4306A /* FetchInvitationnData.m */; };
 		840D069D221D89BB0018FA20 /* itemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840D069C221D89BB0018FA20 /* itemViewController.m */; };
 		8411662F222544600075D0BA /* CompareList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8411662E222544600075D0BA /* CompareList.m */; };
 		841FCDC72229A2A90056D55F /* SaveItemToCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 841FCDC62229A2A90056D55F /* SaveItemToCloud.m */; };
 		841FCDCA2229AF210056D55F /* DeleteItemFromCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 841FCDC92229AF210056D55F /* DeleteItemFromCloud.m */; };
+		84435D9F222ACFC300C1BCF7 /* InvitationClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 84435D9E222ACFC300C1BCF7 /* InvitationClass.m */; };
+		84435DA2222AFC2B00C1BCF7 /* ReadInvitations.m in Sources */ = {isa = PBXBuildFile; fileRef = 84435DA1222AFC2B00C1BCF7 /* ReadInvitations.m */; };
 		848167AA221FF6250068BFF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 848167A9221FF6250068BFF9 /* GoogleService-Info.plist */; };
 		848167AD2221559E0068BFF9 /* SaveListOnCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 848167AC2221559E0068BFF9 /* SaveListOnCloud.m */; };
 		848167B0222170EE0068BFF9 /* DateAndTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 848167AF222170EE0068BFF9 /* DateAndTime.m */; };
@@ -71,6 +74,8 @@
 		8400328622175E5400498A8F /* SetTheUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetTheUser.m; sourceTree = "<group>"; };
 		84085ACA2229948400F70A27 /* DeleteListFromCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeleteListFromCloud.h; sourceTree = "<group>"; };
 		84085ACB2229948400F70A27 /* DeleteListFromCloud.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeleteListFromCloud.m; sourceTree = "<group>"; };
+		840D02C5222C629D00B4306A /* FetchInvitationnData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FetchInvitationnData.h; sourceTree = "<group>"; };
+		840D02C6222C629D00B4306A /* FetchInvitationnData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FetchInvitationnData.m; sourceTree = "<group>"; };
 		840D069B221D89BB0018FA20 /* itemViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = itemViewController.h; sourceTree = "<group>"; };
 		840D069C221D89BB0018FA20 /* itemViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = itemViewController.m; sourceTree = "<group>"; };
 		8411662D222544600075D0BA /* CompareList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompareList.h; sourceTree = "<group>"; };
@@ -79,6 +84,10 @@
 		841FCDC62229A2A90056D55F /* SaveItemToCloud.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveItemToCloud.m; sourceTree = "<group>"; };
 		841FCDC82229AF210056D55F /* DeleteItemFromCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeleteItemFromCloud.h; sourceTree = "<group>"; };
 		841FCDC92229AF210056D55F /* DeleteItemFromCloud.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeleteItemFromCloud.m; sourceTree = "<group>"; };
+		84435D9D222ACFC300C1BCF7 /* InvitationClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvitationClass.h; sourceTree = "<group>"; };
+		84435D9E222ACFC300C1BCF7 /* InvitationClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvitationClass.m; sourceTree = "<group>"; };
+		84435DA0222AFC2B00C1BCF7 /* ReadInvitations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReadInvitations.h; sourceTree = "<group>"; };
+		84435DA1222AFC2B00C1BCF7 /* ReadInvitations.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReadInvitations.m; sourceTree = "<group>"; };
 		848167A9221FF6250068BFF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		848167AB2221559E0068BFF9 /* SaveListOnCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaveListOnCloud.h; sourceTree = "<group>"; };
 		848167AC2221559E0068BFF9 /* SaveListOnCloud.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveListOnCloud.m; sourceTree = "<group>"; };
@@ -188,6 +197,12 @@
 				841FCDC62229A2A90056D55F /* SaveItemToCloud.m */,
 				841FCDC82229AF210056D55F /* DeleteItemFromCloud.h */,
 				841FCDC92229AF210056D55F /* DeleteItemFromCloud.m */,
+				84435D9D222ACFC300C1BCF7 /* InvitationClass.h */,
+				84435D9E222ACFC300C1BCF7 /* InvitationClass.m */,
+				84435DA0222AFC2B00C1BCF7 /* ReadInvitations.h */,
+				84435DA1222AFC2B00C1BCF7 /* ReadInvitations.m */,
+				840D02C5222C629D00B4306A /* FetchInvitationnData.h */,
+				840D02C6222C629D00B4306A /* FetchInvitationnData.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -303,10 +318,12 @@
 				849B2C0122183F0F00C82739 /* ReadUserFromDisk.m in Sources */,
 				84085ACC2229948400F70A27 /* DeleteListFromCloud.m in Sources */,
 				849B2C0022183F0700C82739 /* WriteUserToDisk.m in Sources */,
+				840D02C7222C629D00B4306A /* FetchInvitationnData.m in Sources */,
 				849B2BFF22183F0200C82739 /* WriteDataToDisk.m in Sources */,
 				849B2BFE22183EFA00C82739 /* PrepareFirstLists.m in Sources */,
 				849B2BFD22183EEF00C82739 /* ReadDataFromDisk.m in Sources */,
 				849B2BFB22183EDC00C82739 /* AppData.m in Sources */,
+				84435DA2222AFC2B00C1BCF7 /* ReadInvitations.m in Sources */,
 				840D069D221D89BB0018FA20 /* itemViewController.m in Sources */,
 				848167B0222170EE0068BFF9 /* DateAndTime.m in Sources */,
 				849B2BFA22183ED600C82739 /* ShopingListsClass.m in Sources */,
@@ -319,6 +336,7 @@
 				849B2BF822183EBB00C82739 /* ItemClass.m in Sources */,
 				849B2C0322183F3C00C82739 /* ListViewController.m in Sources */,
 				84D82C4A2218290F00109AB1 /* AppDelegate.m in Sources */,
+				84435D9F222ACFC300C1BCF7 /* InvitationClass.m in Sources */,
 				840032B02217F81400498A8F /* main.m in Sources */,
 				841FCDCA2229AF210056D55F /* DeleteItemFromCloud.m in Sources */,
 			);

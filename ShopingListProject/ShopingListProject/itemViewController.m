@@ -12,14 +12,14 @@
     _nameOfList.text=_sharedInstance.curLST[_curLSTInt].listName;
     _textField.returnKeyType=UIReturnKeyDone;
     _textField.delegate=self;
-
+    
 }
 
 #pragma mark - textFeild Delegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
-
+    
     return YES;
 }
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
@@ -27,18 +27,18 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-   
+    
     if (![textField.text isEqualToString:@""])
     {NSString*timeNow=[DateAndTime dateAndTimeNow];
-    
-    ItemClass *newItem=[[ItemClass alloc]initWithName:_textField.text AnditemTime:timeNow AndItemPurchased:NO];
-    [_sharedInstance.curLST[_curLSTInt].listItems addObject:newItem];
-    [WriteDataToDisk WriteData];
-    [_itemTableView reloadData];
-    [SaveItemToCloud saveItemToCloudWithItem:newItem andInpList:_sharedInstance.curLST[_curLSTInt]];
-
-    _textField.text=@"";
-    
+        
+        ItemClass *newItem=[[ItemClass alloc]initWithName:_textField.text AnditemTime:timeNow AndItemPurchased:NO];
+        [_sharedInstance.curLST[_curLSTInt].listItems addObject:newItem];
+        [WriteDataToDisk WriteData];
+        [_itemTableView reloadData];
+        [SaveItemToCloud saveItemToCloudWithItem:newItem andInpList:_sharedInstance.curLST[_curLSTInt]];
+        
+        _textField.text=@"";
+        
     }
     
 }
@@ -65,16 +65,81 @@
         textField.keyboardType  = UIKeyboardTypeEmailAddress;
         
     }];
-   
-    [sharAlert addAction:[UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //code here
-    }] ];
+    
+    [sharAlert addAction:[UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleDefault
+                                                handler:^(UIAlertAction * _Nonnull action) {
+                                          //here code to share list with email address
+                                            if ([sharAlert.textFields[0].text isEqualToString:@""])
+                                            {
+                                                [self showAlertWithTitle:@"Empty Field" AndBody:@"Please Enter the emai address"];
+                                            }
+                                            else
+                                            {
+                                            [self inviteUserWithEmail:sharAlert.textFields[0].text];
+                                            }
+                                        
+                                        }] ];
     
     [sharAlert addAction: [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
     
     [self presentViewController:sharAlert animated:YES completion:nil];
-
+    
 }
+
+#pragma mark - helper Mothed
+-(void)inviteUserWithEmail:(NSString*)inpEmail{
+    
+    __block UserClass *ownerUser=_sharedInstance.curLST[_curLSTInt].listOwner;
+    __block UserClass *inviteeUser;/// we will search in nodes to get it
+    NSString*listName= _sharedInstance.curLST[_curLSTInt].listName;
+    
+    [_sharedInstance.userNode observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        
+        NSDictionary *AllUsers =[[NSDictionary alloc]init];
+        
+            AllUsers=snapshot.value;
+      
+        for (NSDictionary * any in AllUsers.allValues) {
+            
+            if ([any[@"email"] isEqualToString:inpEmail ] ){
+                
+                inviteeUser=[[UserClass alloc]initWithnName:[any objectForKey:@"name"]
+                                                   AndEmail:[any objectForKey:@"email"]
+                                                     AndUid:[any objectForKey:@"uiid"]];
+                break;
+            }
+        }
+        ///here we did not found any email equal inpEmail
+        if (inviteeUser == nil){
+            [self showAlertWithTitle:@"Non user found" AndBody:@"please try another Email Address"];
+            return ;
+        }
+        
+        NSString *inivitationTitle=[NSString stringWithFormat:@"%@|%@",ownerUser.uid ,listName];
+        
+        NSDictionary *inviteeDic=[[NSDictionary alloc]initWithObjectsAndKeys:
+                                  listName,@"listName",
+                                  inviteeUser.email,@"email",
+                                  inviteeUser.uid,@"uid", nil];
+       
+        FIRDatabaseReference *invitationNode=[[[self.sharedInstance.userNode
+                                          child:inviteeUser.uid]
+                                          child:@"invitations"]
+                                          child:inivitationTitle];
+        
+        [invitationNode setValue:inviteeDic];
+        
+    }];
+    [self showAlertWithTitle:@"success" AndBody:@"your Invitation sent successfully"];
+    
+    
+    
+}
+
+
+
+
 
 #pragma mark - uitable view dataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -84,7 +149,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"itemCell"];
-
+    
     ItemClass *itemToCell=_sharedInstance.curLST[_curLSTInt].listItems[indexPath.row];
     cell.textLabel.text=itemToCell.itemName;
     if (itemToCell.itemPuchased)
@@ -93,7 +158,7 @@
         cell.textLabel.font=[UIFont systemFontOfSize:18];
         cell.backgroundColor=[UIColor darkGrayColor];
         cell.textLabel.textColor=[UIColor lightGrayColor];
-        //add attribute to cell 
+        //add attribute to cell
         NSMutableAttributedString *attr=[[NSMutableAttributedString alloc]initWithString:cell.textLabel.text];
         [attr addAttribute:NSStrikethroughStyleAttributeName value:@2 range:NSMakeRange(0, cell.textLabel.text.length)];
         cell.textLabel.attributedText=attr;

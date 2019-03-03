@@ -9,13 +9,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ShopingListProject/Classes/CompareList.m"
-            timestampString = "573203372.013173"
+            filePath = "ShopingListProject/itemViewController.m"
+            timestampString = "573332390.627775"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "5"
-            endingLineNumber = "5"
-            landmarkName = "+compare:and:"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "-inviteUserWithEmail:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShopingListProject/Classes/FetchInvitationnData.m"
+            timestampString = "573340698.873873"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "+FetchInvitationList"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

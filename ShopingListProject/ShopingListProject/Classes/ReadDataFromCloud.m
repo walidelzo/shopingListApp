@@ -1,13 +1,13 @@
 #import "ReadDataFromCloud.h"
 
 @implementation ReadDataFromCloud
-
 + (void)read{
     AppData* sharedInstance=[AppData SharedManager];
     
     
     NSMutableArray *onlineList=[NSMutableArray new];
     NSString*userId= FIRAuth.auth.currentUser.uid;
+    
     [[sharedInstance.dataNode child:userId] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         if (snapshot.hasChildren){
@@ -55,6 +55,5 @@
     }];
 
 
-    NSLog(@" - - - - - ->  %li",sharedInstance.onlineLST.count);
 }
 @end
