@@ -120,8 +120,9 @@
         
         NSDictionary *inviteeDic=[[NSDictionary alloc]initWithObjectsAndKeys:
                                   listName,@"listName",
-                                  inviteeUser.email,@"email",
-                                  inviteeUser.uid,@"uid", nil];
+                                  ownerUser.name,@"ListOwner",
+                                  ownerUser.email,@"email",
+                                  ownerUser.uid,@"uid", nil];
        
         FIRDatabaseReference *invitationNode=[[[self.sharedInstance.userNode
                                           child:inviteeUser.uid]

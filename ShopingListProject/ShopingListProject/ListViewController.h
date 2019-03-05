@@ -12,6 +12,7 @@
 #import "Classes/DeleteListFromCloud.h"
 #import "Classes/ReadInvitations.h"
 #import "Classes/FetchInvitationnData.h"
+#import "Classes/RemoveInvitation.h"
 
 @interface ListViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 

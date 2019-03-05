@@ -13,7 +13,9 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    //[self loginWithEmail:@"waleedelzo@gmail.com" AndPassword:@"qaws@123"];
     [_listTableView reloadData];
+    
 }
 
 
@@ -21,7 +23,7 @@
     [super viewDidLoad];
     
     _sharedInstance=[AppData SharedManager];
-    //  [self logout];
+    // [self logout];
     [self readData];
     NSLog(@"%@",[WritePlist ReturnFullDirPath]);
     // [self testFirebase];
@@ -86,6 +88,7 @@
 -(void)readData{
     
     [ReadUserFromDisk read];
+    
     if (_sharedInstance.curUser.uid == nil)
     {
         NSLog(@"default data .....");
@@ -105,20 +108,14 @@
     
     
     if (FIRAuth.auth.currentUser.uid!= nil){
-        NSLog(@"----you are online----");
         
         [self setUpProfileButtonWithTitle:@"Online!" andColor:[UIColor greenColor]];
         
         [ReadDataFromDisk readData];
         [ReadDataFromCloud read];
-        [ReadInvitations readCoordinates];
-        NSLog(@"---online list --- >%li",_sharedInstance.onlineLST.count);
-        NSLog(@"--invitationscoords --> %lu %@ , %@ --->",_sharedInstance.invitationsCoords.count,_sharedInstance.invitationsCoords[0].listName,_sharedInstance.invitationsCoords[1].listName);
-       
-        [FetchInvitationnData FetchInvitationList];
-        NSLog(@" -=-=-=- the fetched invitations count is -=-=---->  %lu",_sharedInstance.invitationLST.count);
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             self.sharedInstance.curLST=[CompareList compare:self.sharedInstance.onlineLST and:self.sharedInstance.offlineLST];
             
@@ -131,7 +128,22 @@
                 
             }
             
-            [self.listTableView reloadData];
+            [WriteDataToDisk WriteData];
+            [ReadInvitations readCoordinates];
+            
+            [FetchInvitationnData FetchInvitationList];
+            NSLog(@" ---- invitations list and owner is : %lu ----> %@",self.sharedInstance.invitationLST.count,self.sharedInstance.invitationLST[0].listOwner.name);
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                for (ShopingListsClass *any in self.sharedInstance.invitationLST) {
+                    [self.sharedInstance.curLST addObject:any];
+                }
+                
+                [self.listTableView reloadData];
+                
+            });
+            
+            
             
         });
         
@@ -217,6 +229,7 @@
 
 
 -(void)loginWithEmail:(NSString*) inpuEmail AndPassword:(NSString*)inpPassword{
+    [self readData];
     
     [[FIRAuth auth]signInWithEmail:inpuEmail password:inpPassword completion:^(FIRAuthDataResult * _Nullable authResult, NSError * _Nullable error) {
         
@@ -450,7 +463,16 @@
 }
 -(NSString*)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return @"Delete this list?";
+    ShopingListsClass *listToDelete=_sharedInstance.curLST[indexPath.row];
+    
+    
+    if ([listToDelete.listOwner.uid isEqualToString:_sharedInstance.curUser.uid])
+        return  @"Delete?";
+    else
+        return @"Reject?";
+    
+    
+    
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -458,9 +480,19 @@
     ShopingListsClass *listToDelete=_sharedInstance.curLST[indexPath.row];
     [_sharedInstance.curLST removeObject:listToDelete];
     
-    [WriteDataToDisk WriteData];
+    if ([listToDelete.listOwner.uid isEqualToString:_sharedInstance.curUser.uid])
+    { [WriteDataToDisk WriteData];
+        
+        [DeleteListFromCloud DeleteFromCloud:listToDelete];
+    }else
+    {
+        
+        InvitationClass *invitatioToremove=[[InvitationClass alloc]initWithListName:listToDelete.listName andListOwner:listToDelete.listOwner];
+        
+        [RemoveInvitation RemoveWithInivitation:invitatioToremove];
+    }
     
-    [DeleteListFromCloud DeleteFromCloud:listToDelete];
+    
     
     [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     
