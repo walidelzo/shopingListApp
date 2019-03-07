@@ -1,2 +1,16 @@
 # Shoping List App with Firebase and Plist 
 
+![simulator screen shot - iphone se - 2019-03-07 at 11 01 03](https://user-images.githubusercontent.com/26598531/53944946-254e3f80-40c9-11e9-9047-8a1619ff1d57.png)
+![simulator screen shot - iphone se - 2019-03-07 at 11 01 06](https://user-images.githubusercontent.com/26598531/53944947-25e6d600-40c9-11e9-9c23-898a0ce7ae27.png)
+![simulator screen shot - iphone se - 2019-03-07 at 11 01 24](https://user-images.githubusercontent.com/26598531/53944948-25e6d600-40c9-11e9-9cf1-33b81f451b96.png)
+![simulator screen shot - iphone se - 2019-03-07 at 11 01 28](https://user-images.githubusercontent.com/26598531/53944949-25e6d600-40c9-11e9-8efb-2fae89586329.png)
+![simulator screen shot - iphone se - 2019-03-07 at 11 01 43](https://user-images.githubusercontent.com/26598531/53944950-267f6c80-40c9-11e9-97e3-190dbea47fae.png)
+![simulator screen shot - iphone se - 2019-03-07 at 11 01 49](https://user-images.githubusercontent.com/26598531/53944952-267f6c80-40c9-11e9-9715-21e10aeb9149.png)
+![simulator screen shot - iphone se - 2019-03-07 at 11 01 57](https://user-images.githubusercontent.com/26598531/53944953-267f6c80-40c9-11e9-993b-b431dab823d0.png)
+![simulator screen shot - iphone se - 2019-03-07 at 11 02 00](https://user-images.githubusercontent.com/26598531/53944955-267f6c80-40c9-11e9-8e54-b553473ad56d.png)
+![simulator screen shot - iphone se - 2019-03-07 at 11 06 22](https://user-images.githubusercontent.com/26598531/53944956-27180300-40c9-11e9-9b29-940c3268c49d.png)
+![simulator screen shot - iphone se - 2019-03-07 at 11 05 33](https://user-images.githubusercontent.com/26598531/53944958-27180300-40c9-11e9-8739-70473d56ff18.png)
+![simulator screen shot - iphone se - 2019-03-07 at 11 05 15](https://user-images.githubusercontent.com/26598531/53944960-27b09980-40c9-11e9-9c58-794409305596.png)
+![simulator screen shot - iphone se - 2019-03-07 at 11 02 18](https://user-images.githubusercontent.com/26598531/53944962-27b09980-40c9-11e9-8db5-7a7395feb478.png)
+![simulator screen shot - iphone se - 2019-03-07 at 11 02 12](https://user-images.githubusercontent.com/26598531/53944964-27b09980-40c9-11e9-949c-eb279695a319.png)
+![simulator screen shot - iphone se - 2019-03-07 at 11 02 04](https://user-images.githubusercontent.com/26598531/53944966-27b09980-40c9-11e9-919d-c40cc1dfe5db.png)
