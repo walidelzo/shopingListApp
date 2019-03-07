@@ -1,6 +1,5 @@
 # Shoping List App with Firebase and Plist 
 
-![simulator screen shot - iphone se - 2019-03-07 at 11 01 03](https://user-images.githubusercontent.com/26598531/53944946-254e3f80-40c9-11e9-9047-8a1619ff1d57.png)
 ![simulator screen shot - iphone se - 2019-03-07 at 11 01 06](https://user-images.githubusercontent.com/26598531/53944947-25e6d600-40c9-11e9-9c23-898a0ce7ae27.png)
 ![simulator screen shot - iphone se - 2019-03-07 at 11 01 24](https://user-images.githubusercontent.com/26598531/53944948-25e6d600-40c9-11e9-9cf1-33b81f451b96.png)
 ![simulator screen shot - iphone se - 2019-03-07 at 11 01 28](https://user-images.githubusercontent.com/26598531/53944949-25e6d600-40c9-11e9-8efb-2fae89586329.png)
